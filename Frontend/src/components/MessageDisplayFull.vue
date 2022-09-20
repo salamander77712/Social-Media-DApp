@@ -36,16 +36,16 @@
       },
       async getTips(){
         let temp;
-        await contract.getPastEvents("MessageTipped", {fromBlock: 0, toBlock:"latest"}).then(function(events){
+        await contract.getPastEvents("MessageTipped", {fromBlock: 0, toBlock:"latest"}).then((events) =>{
           temp = events;
-        });
-        for(let i = 0; i < temp.length; i++){
+          for(let i = 0; i < temp.length; i++){
           if(temp[i].returnValues.author.toUpperCase() == this.event.returnValues.author.toUpperCase()){
             if(temp[i].returnValues.messageID == this.event.returnValues.id){
               this.tips += Number(temp[i].returnValues.tipAmount);
             }
           }
         }
+        });
       },
       async getComments(){
         let temp;
@@ -136,7 +136,7 @@
       </div>
       <div class="commentContainer">
         <div class="comment" v-for="comment in comments">
-          <MessageDisplay :event="comment"></MessageDisplay>
+          <MessageDisplayFull :author="comment.returnValues.author" :id="comment.returnValues.id"></MessageDisplayFull>
         </div>
       </div>
     </div>
@@ -158,5 +158,15 @@
     a{
       text-decoration: underline;
       cursor: pointer;
+    }
+    .commentContainer {
+  width: 200px;
+  margin: 0 auto;
+  background-color: yellow;
+    }
+
+    .comment {
+  margin-left: 50px;
+  background-color: orange;
     }
   </style>
