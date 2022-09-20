@@ -1,6 +1,4 @@
-<script setup>
-  import MessageDisplay from './MessageDisplay.vue'
-</script>
+
 <script>
   export default {
     props: ['author', 'id'],
@@ -12,9 +10,9 @@
         comments: [],
         event: {
           returnValues: {
-            author: 'Proxies',
-            id: 'are',
-            content: 'garbage'
+            author: 'Something',
+            id: 'is',
+            content: 'wrong'
           }
         },
         commentContent: ''
@@ -128,10 +126,10 @@
       <p class="tips">Tips: {{tips}}</p>
       <p class="content">{{event.returnValues.content}}</p>
       <div class="buttons">
-        <input type="number" v-model="tipAmount"/>
+        <input type="number" v-model="tipAmount">
         <button @click="tip">Tip</button>
         <br>
-        <input type="text" v-model="commentContent" />
+        <input type="text" v-model="commentContent">
         <button @click="comment">Comment</button>
       </div>
       <div class="commentContainer">

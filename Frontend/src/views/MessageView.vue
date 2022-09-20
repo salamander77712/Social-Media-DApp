@@ -11,6 +11,6 @@ import MessageDisplayFull from '../components/MessageDisplayFull.vue'
 
 <template>
   <main>
-    <MessageDisplayFull :author="this.$route.params.address" :id="this.$route.params.id" />
+    <MessageDisplayFull :author="$route.params.address" :id="$route.params.id" />
   </main>
 </template>

@@ -4,6 +4,6 @@ import ProfilePage from '../components/ProfilePage.vue'
 
 <template>
   <main>
-    <ProfilePage :address="this.$route.params" />
+    <ProfilePage :address="$route.params" />
   </main>
 </template>
