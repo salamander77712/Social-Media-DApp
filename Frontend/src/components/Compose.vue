@@ -9,7 +9,6 @@
       async writeMessage(){
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
         const account = accounts[0];
-        //console.log(contract);
         contract.methods.createMessage(this.message).send({ from: account});
       }
     }

@@ -1,21 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import CheckView from '../views/CheckView.vue'
-import MetaQA from '../views/MetaView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'check',
-      component: CheckView
+      name: 'home',
+      component: () => import('../views/HomePageView.vue')
     },
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     },
     {
@@ -37,6 +32,16 @@ const router = createRouter({
       path: '/compose',
       name: 'compose',
       component: () => import('../views/ComposeView.vue')
+    },
+    {
+    path: '/check',
+    name: 'check',
+    component: () => import('../views/CheckView.vue')
+    },
+    {
+      path: '/u/:address/p/:id',
+      name: 'message-page',
+      component: () => import('../views/MessageView.vue')
     }
   ]
 })
