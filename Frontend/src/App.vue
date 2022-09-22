@@ -11,7 +11,7 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/check">Login</RouterLink>
       </nav>
   </header>
-  <RouterView />
+  <RouterView :key="$route.fullPath"/>
 </template>
 
 <style scoped>

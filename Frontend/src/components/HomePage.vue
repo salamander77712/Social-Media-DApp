@@ -13,17 +13,22 @@
         let temp;
         if (contract == undefined) {
           if(window.ethereum != undefined){
-            window.web3 = new Web3(window.ethereum);
+            if(window.ethereum.networkVersion == 5){
+              window.web3 = new Web3(window.ethereum);
+            }
+            else{
+              this.$router.push('/meta-mask-qa');
+            }
           }
           else{
             window.web3 = new Web3(new Web3.providers.HttpProvider('https://goerli.infura.io/v3/3500b93fc44b48c58086a2fedeb8fc2e'));
           }
           contract = new web3.eth.Contract(contractData.abi, contractAddress);
+        }
           await contract.getPastEvents("MessageCreated", {fromBlock: 0, toBlock:"latest"}).then(function(events){
           temp = events;
         });
         this.messages=temp;
-        }
       }
     },
     created(){
