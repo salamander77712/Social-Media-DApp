@@ -106,7 +106,6 @@
       }
     },
       created(){
-        //javascript is utterly insane
       this.getEvent().then( () => {
           this.getUsername().then( () => {
             this.getTips().then( () => {

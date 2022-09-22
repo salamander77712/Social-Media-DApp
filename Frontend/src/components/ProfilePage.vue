@@ -8,7 +8,6 @@
       return {
         messages: [],
         newUsername: '',
-        account: undefined,
         username: ''
       }
     },
@@ -28,12 +27,8 @@
           }
         }
       },
-      async getAccount(){
-        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        this.account = accounts[0];
-      },
       changeUsername(){
-        contract.methods.changeUsername(this.newUsername).send({ from: this.account, value: 100})
+        contract.methods.changeUsername(this.newUsername).send({ from: account, value: 100})
       },
       async getUsername(){
         let temp;
@@ -51,15 +46,14 @@
     },
     computed:{
       isUser(){
-        if(this.account == undefined){
+        if(account == undefined){
           return false;
         }
-        return (this.account.toUpperCase() == this.address.address.toUpperCase());
+        return (account.toUpperCase() == this.address.address.toUpperCase());
       }
     },
     created(){
       this.getMessages();
-      this.getAccount();
       this.getUsername();
     }
   }

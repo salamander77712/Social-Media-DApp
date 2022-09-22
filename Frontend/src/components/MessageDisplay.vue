@@ -39,13 +39,13 @@
         });
       },
       async tip(){
-        contract.methods.tipMessage(this.event.returnValues.author, this.event.returnValues.id).send({ from: this.account, value: this.tipAmount});
+        contract.methods.tipMessage(this.event.returnValues.author, this.event.returnValues.id).send({ from: account, value: this.tipAmount});
       },
       goToAuthor(){
         this.$router.push('/u/' + this.event.returnValues.author);
       },
       async deleteMessage(){
-        contract.methods.deleteMessage(this.event.returnValues.id).send({ from: this.account});
+        contract.methods.deleteMessage(this.event.returnValues.id).send({ from: account});
       },
       async checkDeleted(){
         let temp;
@@ -73,20 +73,16 @@
         }
         });
       },
-      async getAccount(){
-        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        this.account = accounts[0];
-      },
       async editMessage(){
-        contract.methods.editMessage(this.event.returnValues.id, this.editText).send({ from: this.account});
+        contract.methods.editMessage(this.event.returnValues.id, this.editText).send({ from: account});
       }
     },
     computed:{
       isUser(){
-        if(this.account == undefined){
+        if(account == undefined){
           return false;
         }
-        return (this.account.toUpperCase() == this.event.returnValues.author.toUpperCase());
+        return (account.toUpperCase() == this.event.returnValues.author.toUpperCase());
       },
       deletedCSS(){
         if(this.deleted){
@@ -109,7 +105,6 @@
       this.getUsername();
       this.getTips();
       this.checkDeleted();
-      this.getAccount();
       this.getLatestEdit();
     }
     }
