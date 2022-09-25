@@ -1,4 +1,4 @@
-
+//deprecated
 <script>
   export default {
     props: ['author', 'id'],
