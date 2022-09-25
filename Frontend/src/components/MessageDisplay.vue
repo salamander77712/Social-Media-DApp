@@ -22,16 +22,16 @@
     },
     methods: {
       async tip(){
-        contract.methods.tipMessage(this.event.returnValues.author, this.event.returnValues.id).send({ from: account, value: this.tipAmount});
+        contract.methods.tipMessage(this.event.returnValues.author, this.event.id).send({ from: account, value: this.tipAmount});
       },
       goToAuthor(){
-        this.$router.push('/u/' + this.event.returnValues.author);
+        this.$router.push('/u/' + this.event.author);
       },
       async deleteMessage(){
-        contract.methods.deleteMessage(this.event.returnValues.id).send({ from: account});
+        contract.methods.deleteMessage(this.event.id).send({ from: account});
       },
       async editMessage(){
-        contract.methods.editMessage(this.event.returnValues.id, this.editText).send({ from: account});
+        contract.methods.editMessage(this.event.id, this.editText).send({ from: account});
       }
     },
     computed:{
