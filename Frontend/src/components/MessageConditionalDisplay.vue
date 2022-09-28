@@ -37,15 +37,18 @@ import MassDisplayMessage from './MassDisplayMessage.vue'
      },
      data (){
       return {
-      messages: []
+      messages: [],
+      addressToUsername: {}
       }
      },
      methods: {
       async getMessages(){
         await contract.getPastEvents("NewMessage", {fromBlock: 0, toBlock:"latest"}).then((events) => {
-          let foramttedMessages = [];
           for(let i = 0; i < events.length; i++){
             let message = events[i].returnValues;
+            if(!this.addressToUsername[messsage.author]){
+              this.addressToUsername[message.author] = message.author;
+            }
             if(this.searchParams.author.is){
               if(!this.searchParams.author.is.includes(message.author)){
                 continue;
@@ -76,6 +79,30 @@ import MassDisplayMessage from './MassDisplayMessage.vue'
                 continue;
               }
             }
+            if(this.searchParams.username.is){
+              if(!this.searchParms.username.is.includes(this.addressToUsername[message.author])){
+                continue;
+              }
+            }
+            if(this.searchParams.username.isNot){
+              if(this.searchParams.username.isNot.includes(this.addressToUsername[message.author])){
+                continue;
+              }
+            }
+            //username contains
+            //username doesNotContain
+            //content contains
+            //content doesNotContain
+            //tipsGreaterThan
+            //tipsLessthan
+            let formattedMessage = {};
+          }
+        });
+      },
+      async getUsernames(){
+        await contract.getPastEvents("NewUsername", {fromBlock: 0, toBlock:"latest"}).then((events) => {
+          for(event in events){
+            this.addressToUsername[event.user] = event.name;
           }
         });
       }
